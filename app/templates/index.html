@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
+
+    <title>Sticky Notes App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .note {
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .note textarea {
+             height: 150px; 
+        }
+        textarea.form-control {
+            height: 150px; 
+        }
+        .yellow {
+            background-color: #feff9c;
+        }
+
+        .lightblue {
+            background-color: lightblue;
+        }
+
+        .pink {
+            background-color: pink;
+        }
+        .note-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .note-content {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Handeliste</h1>
+            <p class="lead">Lag en ny liste:</p>
+            <form id="addNoteForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="note_title" placeholder="Title">
+                    <textarea class="form-control" name="note_text" id="note_text" placeholder="Note Text"></textarea>
+
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="note_color">
+                        <option value="yellow">Yellow</option>
+                        <option value="lightblue">Blue</option>
+                        <option value="pink">Pink</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+
+        <div class="row" id="noteContainer">
+            {% for note in notes %}
+                <div class="col-md-4 note {{ note.color }}" data-note-id="{{ note.id }}">
+                    <h5 class="note-title">{{ note.title }}</h5>
+                    <p class="note-content">{{ note.description }}</p>
+                    <button class="btn btn-danger deleteNoteBtn">Delete</button>
+                    <button class="btn btn-primary editNoteBtn">Edit</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
